@@ -27,6 +27,13 @@ spec = do
     it "should return True" $ do
       L.inFirstHalf 'f' "abcde" `shouldBe` False
 
+  describe "myTali" $ do
+    it "should return []" $ do
+      L.myTail [1] `shouldBe` []
+
+    it "should return \"ello\"" $ do
+      L.myTail "Hello" `shouldBe` "ello"
+
   describe "myTake" $ do
     it "should return \"\"" $ do
       L.myTake 2 "" `shouldBe` ""

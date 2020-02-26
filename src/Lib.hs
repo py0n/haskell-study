@@ -1,5 +1,6 @@
 module Lib
   ( inFirstHalf
+  , myTail
   , myTake
   , someFunc
   , subseq
@@ -22,3 +23,7 @@ myTake :: (Eq t, Num t) => t -> [a] -> [a]
 myTake _ []       = []
 myTake 0 _        = []
 myTake m (x : xs) = x : myTake (m - 1) xs
+
+-- Quick Check 7-3
+myTail :: [a] -> [a]
+myTail (_ : xs) = xs
