@@ -27,6 +27,19 @@ spec = do
     it "should return True" $ do
       L.inFirstHalf 'f' "abcde" `shouldBe` False
 
+  describe "myGCD" $ do
+    it "should return 6" $ do
+      L.myGCD 12 18 `shouldBe` 6
+
+    it "should return 6" $ do
+      L.myGCD 12 18 `shouldBe` 6
+
+    it "should return 1" $ do
+      L.myGCD 5 7 `shouldBe` 1
+
+    it "should return 1" $ do
+      L.myGCD 5 1 `shouldBe` 1
+
   describe "myTali" $ do
     it "should return \"\"" $ do
       L.myTail "" `shouldBe` ""

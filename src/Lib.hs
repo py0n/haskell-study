@@ -1,5 +1,6 @@
 module Lib
   ( inFirstHalf
+  , myGCD
   , myTail
   , myTake
   , someFunc
@@ -28,3 +29,8 @@ myTake m (x : xs) = x : myTake (m - 1) xs
 myTail :: [a] -> [a]
 myTail []       = []
 myTail (_ : xs) = xs
+
+-- Q7-2
+myGCD :: Integral t => t -> t -> t
+myGCD a b | b == 0    = a
+          | otherwise = myGCD b (a `mod` b)
