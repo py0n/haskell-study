@@ -47,6 +47,13 @@ spec = do
     it "should return 1" $ do
       L.myGCD 5 1 `shouldBe` 1
 
+  describe "myLength" $ do
+    it "should return 0" $ do
+      L.myLength [] `shouldBe` 0
+
+    it "should return 5" $ do
+      L.myLength "abcde" `shouldBe` 5
+
   describe "myTali" $ do
     it "should return \"\"" $ do
       L.myTail "" `shouldBe` ""

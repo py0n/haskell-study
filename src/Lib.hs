@@ -2,6 +2,7 @@ module Lib
   ( inFirstHalf
   , myDrop
   , myGCD
+  , myLength
   , myTail
   , myTake
   , someFunc
@@ -41,3 +42,7 @@ myDrop :: (Eq t, Num t) => t -> [a] -> [a]
 myDrop _ []       = []
 myDrop 0 xs       = xs
 myDrop m (x : xs) = myDrop (m - 1) xs
+
+-- Quick Check 8-1
+myLength []       = 0
+myLength (x : xs) = 1 + myLength xs
