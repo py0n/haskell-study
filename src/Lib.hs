@@ -26,4 +26,5 @@ myTake m (x : xs) = x : myTake (m - 1) xs
 
 -- Quick Check 7-3
 myTail :: [a] -> [a]
+myTail []       = []
 myTail (_ : xs) = xs

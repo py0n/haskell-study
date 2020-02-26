@@ -28,6 +28,9 @@ spec = do
       L.inFirstHalf 'f' "abcde" `shouldBe` False
 
   describe "myTali" $ do
+    it "should return \"\"" $ do
+      L.myTail "" `shouldBe` ""
+
     it "should return []" $ do
       L.myTail [1] `shouldBe` []
 
