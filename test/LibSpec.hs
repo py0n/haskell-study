@@ -27,6 +27,13 @@ spec = do
     it "should return True" $ do
       L.inFirstHalf 'f' "abcde" `shouldBe` False
 
+  describe "myDrop" $ do
+    it "should return \"\"" $ do
+      L.myDrop 3 "" `shouldBe` ""
+
+    it "should return [3,4,5]" $ do
+      L.myDrop 2 [1 .. 5] `shouldBe` [3 .. 5]
+
   describe "myGCD" $ do
     it "should return 6" $ do
       L.myGCD 12 18 `shouldBe` 6

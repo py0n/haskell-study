@@ -1,5 +1,6 @@
 module Lib
   ( inFirstHalf
+  , myDrop
   , myGCD
   , myTail
   , myTake
@@ -34,3 +35,9 @@ myTail (_ : xs) = xs
 myGCD :: Integral t => t -> t -> t
 myGCD a b | b == 0    = a
           | otherwise = myGCD b (a `mod` b)
+
+-- Lesson8
+myDrop :: (Eq t, Num t) => t -> [a] -> [a]
+myDrop _ []       = []
+myDrop 0 xs       = xs
+myDrop m (x : xs) = myDrop (m - 1) xs
