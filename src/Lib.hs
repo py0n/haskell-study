@@ -3,6 +3,8 @@ module Lib
   , myDrop
   , myGCD
   , myLength
+  , myReverse
+  , myReverse'
   , myTail
   , myTake
   , someFunc
@@ -46,3 +48,13 @@ myDrop m (x : xs) = myDrop (m - 1) xs
 -- Quick Check 8-1
 myLength []       = 0
 myLength (x : xs) = 1 + myLength xs
+
+-- Q8-1
+myReverse :: [a] -> [a]
+myReverse xs = g [] xs
+ where
+  g ys []       = ys
+  g ys (x : xs) = g (x : ys) xs
+
+myReverse' :: Foldable t => t a -> [a]
+myReverse' xs = foldl (\a x -> x:a) [] xs

@@ -54,6 +54,20 @@ spec = do
     it "should return 5" $ do
       L.myLength "abcde" `shouldBe` 5
 
+  describe "myReverse" $ do
+    it "should return \"\"" $ do
+      L.myReverse "" `shouldBe` ""
+
+    it "should return \"edcba\"" $ do
+      L.myReverse "abcde" `shouldBe` "edcba"
+
+  describe "myReverse'" $ do
+    it "should return \"\"" $ do
+      L.myReverse' "" `shouldBe` ""
+
+    it "should return \"edcba\"" $ do
+      L.myReverse' "abcde" `shouldBe` "edcba"
+
   describe "myTali" $ do
     it "should return \"\"" $ do
       L.myTail "" `shouldBe` ""
