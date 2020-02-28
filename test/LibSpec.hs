@@ -144,6 +144,20 @@ spec = do
     it "should return \"abcde\"" $ do
       L.myTake 6 "abcde" `shouldBe` "abcde"
 
+  describe "remove" $ do
+    it "should return \"\"" $ do
+      L.remove (\x -> x == 'A') "" `shouldBe` ""
+
+    it "should return \"ABDE\"" $ do
+      L.remove (\x -> x == 'C') "ABCDE" `shouldBe` "ABDE"
+
+  describe "remove'" $ do
+    it "should return \"\"" $ do
+      L.remove' (\x -> x == 'A') "" `shouldBe` ""
+
+    it "should return \"ABDE\"" $ do
+      L.remove' (\x -> x == 'C') "ABCDE" `shouldBe` "ABDE"
+
   describe "subseq" $ do
     it "should return [3,4,5]" $ do
       L.subseq 2 5 [1 .. 10] `shouldBe` [3, 4, 5]

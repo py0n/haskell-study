@@ -9,6 +9,8 @@ module Lib
   , myReverse'
   , myTail
   , myTake
+  , remove
+  , remove'
   , someFunc
   , subseq
   )
@@ -72,3 +74,10 @@ fib' n = fastFib 0 1 n
  where
   fastFib a _ 0 = a
   fastFib a b n = fastFib b (a + b) (n - 1)
+
+-- Quick Check 9-1
+remove :: (a -> Bool) -> [a] -> [a]
+remove _ []       = []
+remove f (x : xs) = if f x then remove f xs else x : remove f xs
+
+remove' f xs = foldr (\x a -> if f x then a else x : a) [] xs
