@@ -14,6 +14,7 @@ module Lib
   , myReverse'
   , myTail
   , myTake
+  , printDouble
   , remove
   , remove'
   , someFunc
@@ -109,3 +110,7 @@ isPalindrome xs = ys == reverse ys where ys = map toUpper (filter isAlpha xs)
 -- Q9-3
 harmonic :: Fractional a => Int -> a
 harmonic n = sum (take n (map (\x -> 1 / fromIntegral x) [1 ..]))
+
+-- Quick Check 11-2
+printDouble :: Int -> String
+printDouble n = show (n * 2)

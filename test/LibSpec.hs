@@ -169,6 +169,10 @@ spec = do
     it "should return \"abcde\"" $ do
       L.myTake 6 "abcde" `shouldBe` "abcde"
 
+  describe "printDouble" $ do
+    it "should retuen \"8\"" $ do
+      L.printDouble 4 `shouldBe` "8"
+
   describe "remove" $ do
     it "should return \"\"" $ do
       L.remove (\x -> x == 'A') "" `shouldBe` ""
