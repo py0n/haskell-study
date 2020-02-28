@@ -8,6 +8,13 @@ import           Lib                           as L
 
 spec :: Spec
 spec = do
+  describe "concatAll" $ do
+    it "sould return \"\"" $ do
+      L.concatAll ["",""] `shouldBe` ""
+
+    it "sould return \"abcdef\"" $ do
+      L.concatAll ["abc","def"] `shouldBe` "abcdef"
+
   describe "fib" $ do
     it "should return 0" $ do
       L.fib 0 `shouldBe` 0

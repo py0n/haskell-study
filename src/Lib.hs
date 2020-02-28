@@ -1,5 +1,6 @@
 module Lib
-  ( fib
+  ( concatAll
+  , fib
   , fib'
   , inFirstHalf
   , myDrop
@@ -86,3 +87,7 @@ remove' f xs = foldr (\x a -> if f x then a else x : a) [] xs
 -- Quick Check 9-2
 myProduct :: (Foldable t, Num b) => t b -> b
 myProduct xs = foldr (*) 1 xs
+
+-- Lesson 9-4
+concatAll :: Foldable t => t [a] -> [a]
+concatAll xss = foldr (++) [] xss
