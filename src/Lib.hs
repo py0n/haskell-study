@@ -4,6 +4,7 @@ module Lib
   , fib'
   , inFirstHalf
   , myDrop
+  , myElem
   , myGCD
   , myLength
   , myProduct
@@ -91,3 +92,6 @@ myProduct xs = foldr (*) 1 xs
 -- Lesson 9-4
 concatAll :: Foldable t => t [a] -> [a]
 concatAll xss = foldr (++) [] xss
+
+-- Q9-1
+myElem z xs = length (filter (\x -> x == z) xs) > 0

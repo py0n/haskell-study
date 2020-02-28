@@ -91,6 +91,16 @@ spec = do
     it "should return [3,4,5]" $ do
       L.myDrop 2 [1 .. 5] `shouldBe` [3 .. 5]
 
+  describe "myElem" $ do
+    it "should return False" $ do
+      L.myElem 'A' "" `shouldBe` False
+
+    it "should return False" $ do
+      L.myElem 'A' "BCDEF" `shouldBe` False
+
+    it "should return True" $ do
+      L.myElem 'A' "ABCDE" `shouldBe` True
+
   describe "myGCD" $ do
     it "should return 6" $ do
       L.myGCD 12 18 `shouldBe` 6
