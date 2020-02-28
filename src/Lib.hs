@@ -3,6 +3,7 @@ module Lib
   , fib
   , fib'
   , inFirstHalf
+  , isPalindrome
   , myDrop
   , myElem
   , myGCD
@@ -18,6 +19,10 @@ module Lib
   , subseq
   )
 where
+
+import           Data.Char                      ( isAlpha
+                                                , toUpper
+                                                )
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
@@ -95,3 +100,7 @@ concatAll xss = foldr (++) [] xss
 
 -- Q9-1
 myElem z xs = length (filter (\x -> x == z) xs) > 0
+
+-- Q9-2
+isPalindrome :: String -> Bool
+isPalindrome xs = ys == reverse ys where ys = map toUpper (filter isAlpha xs)
