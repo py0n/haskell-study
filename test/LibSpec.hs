@@ -8,6 +8,56 @@ import           Lib                           as L
 
 spec :: Spec
 spec = do
+  describe "fib" $ do
+    it "should return 0" $ do
+      L.fib 0 `shouldBe` 0
+
+    it "should return 1" $ do
+      L.fib 1 `shouldBe` 1
+
+    it "should return 1" $ do
+      L.fib 2 `shouldBe` 1
+
+    it "should return 2" $ do
+      L.fib 3 `shouldBe` 2
+
+    it "should return 3" $ do
+      L.fib 4 `shouldBe` 3
+
+    it "should return 5" $ do
+      L.fib 5 `shouldBe` 5
+
+    it "should return 8" $ do
+      L.fib 6 `shouldBe` 8
+
+    it "should return 13" $ do
+      L.fib 7 `shouldBe` 13
+
+  describe "fib'" $ do
+    it "should return 0" $ do
+      L.fib' 0 `shouldBe` 0
+
+    it "should return 1" $ do
+      L.fib' 1 `shouldBe` 1
+
+    it "should return 1" $ do
+      L.fib' 2 `shouldBe` 1
+
+    it "should return 2" $ do
+      L.fib' 3 `shouldBe` 2
+
+    it "should return 3" $ do
+      L.fib' 4 `shouldBe` 3
+
+    it "should return 5" $ do
+      L.fib' 5 `shouldBe` 5
+
+    it "should return 8" $ do
+      L.fib' 6 `shouldBe` 8
+
+    it "should return 13" $ do
+      L.fib' 7 `shouldBe` 13
+
   describe "inFirstHalf" $ do
     it "should return True" $ do
       L.inFirstHalf 'a' "abcde" `shouldBe` True
