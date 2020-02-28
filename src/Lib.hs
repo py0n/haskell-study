@@ -2,6 +2,7 @@ module Lib
   ( concatAll
   , fib
   , fib'
+  , harmonic
   , inFirstHalf
   , isPalindrome
   , myDrop
@@ -104,3 +105,7 @@ myElem z xs = length (filter (\x -> x == z) xs) > 0
 -- Q9-2
 isPalindrome :: String -> Bool
 isPalindrome xs = ys == reverse ys where ys = map toUpper (filter isAlpha xs)
+
+-- Q9-3
+harmonic :: Fractional a => Int -> a
+harmonic n = sum (take n (map (\x -> 1 / fromIntegral x) [1 ..]))
