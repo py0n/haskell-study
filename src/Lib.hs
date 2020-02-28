@@ -5,6 +5,7 @@ module Lib
   , myDrop
   , myGCD
   , myLength
+  , myProduct
   , myReverse
   , myReverse'
   , myTail
@@ -81,3 +82,7 @@ remove _ []       = []
 remove f (x : xs) = if f x then remove f xs else x : remove f xs
 
 remove' f xs = foldr (\x a -> if f x then a else x : a) [] xs
+
+-- Quick Check 9-2
+myProduct :: (Foldable t, Num b) => t b -> b
+myProduct xs = foldr (*) 1 xs

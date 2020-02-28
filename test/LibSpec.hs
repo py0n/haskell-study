@@ -104,6 +104,10 @@ spec = do
     it "should return 5" $ do
       L.myLength "abcde" `shouldBe` 5
 
+  describe "myProduct" $ do
+    it "should return 24" $ do
+      L.myProduct [1,2,3,4] `shouldBe` 24
+
   describe "myReverse" $ do
     it "should return \"\"" $ do
       L.myReverse "" `shouldBe` ""
