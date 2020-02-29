@@ -1,6 +1,7 @@
 module Lib
   ( ABOType(A, B, AB, O)
   , BloodType(BloodType)
+  , FiveSideDie(S1, S2, S3, S4, S5)
   , Name(Name, NameWithMiddle)
   , Patient(Patient)
   , RhType(Pos, Neg)
@@ -25,6 +26,7 @@ module Lib
   , printDouble
   , remove
   , remove'
+  , roll
   , someFunc
   , subseq
   )
@@ -195,3 +197,12 @@ patientSummary p =
 cycleSucc :: (Bounded a, Enum a, Eq a) => a -> a
 cycleSucc n | n == maxBound = minBound
             | otherwise     = succ n
+
+-- Q14-2
+data FiveSideDie = S1 | S2 | S3 | S4 | S5 deriving (Enum, Eq, Show)
+
+class (Eq a, Enum a) => Die a where
+  roll :: Int -> a
+
+instance Die FiveSideDie where
+  roll n = toEnum (n `mod` 5)

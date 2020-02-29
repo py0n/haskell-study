@@ -191,6 +191,13 @@ spec = do
     it "should return \"ABDE\"" $ do
       L.remove' (\x -> x == 'C') "ABCDE" `shouldBe` "ABDE"
 
+  describe "roll" $ do
+    it "should return S3" $ do
+      (L.roll 2 :: FiveSideDie) `shouldBe` L.S3
+
+    it "should return S3" $ do
+      (L.roll 7 :: FiveSideDie) `shouldBe` L.S3
+
   describe "subseq" $ do
     it "should return [3,4,5]" $ do
       L.subseq 2 5 [1 .. 10] `shouldBe` [3, 4, 5]
