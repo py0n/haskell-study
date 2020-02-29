@@ -15,6 +15,10 @@ spec = do
     it "sould return \"abcdef\"" $ do
       L.concatAll ["abc","def"] `shouldBe` "abcdef"
 
+  describe "cycleSucc" $ do
+    it "should return minBound :: Int" $ do
+      L.cycleSucc (maxBound :: Int) `shouldBe` (minBound :: Int)
+
   describe "fib" $ do
     it "should return 0" $ do
       L.fib 0 `shouldBe` 0

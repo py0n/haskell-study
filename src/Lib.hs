@@ -6,6 +6,7 @@ module Lib
   , RhType(Pos, Neg)
   , Sex(Male, Female)
   , concatAll
+  , cycleSucc
   , fib
   , fib'
   , harmonic
@@ -189,3 +190,8 @@ patientSummary p =
   showRh (BloodType _ Pos) = "+"
   showRh (BloodType _ Neg) = "-"
   showBloodType b = showABO b ++ showRh b
+
+-- Q13-3
+cycleSucc :: (Bounded a, Enum a, Eq a) => a -> a
+cycleSucc n | n == maxBound = minBound
+            | otherwise     = succ n
