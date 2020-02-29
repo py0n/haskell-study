@@ -20,6 +20,7 @@ module Lib
   , myReverse'
   , myTail
   , myTake
+  , patientSummary
   , printDouble
   , remove
   , remove'
@@ -151,3 +152,40 @@ canDonateTo p q = g (bloodType p) (bloodType q)
   g (BloodType A _)   (BloodType A  _)  = True
   g (BloodType B _)   (BloodType B  _)  = True
   g _                 _                 = False
+
+-- Q12-2
+patientSummary :: Patient -> String
+patientSummary p =
+  "**********\n"
+    ++ "Patient Name: "
+    ++ lastName (name p)
+    ++ ", "
+    ++ firstName (name p)
+    ++ "\n"
+    ++ "Sex: "
+    ++ show (sex p)
+    ++ "\n"
+    ++ "Age: "
+    ++ show (age p)
+    ++ "\n"
+    ++ "Height: "
+    ++ show (height p)
+    ++ " in.\n"
+    ++ "Weight: "
+    ++ show (weight p)
+    ++ " lbs.\n"
+    ++ "Blood Type: "
+    ++ showBloodType (bloodType p)
+    ++ "\n**********\n"
+ where
+  lastName (Name _ l            ) = l
+  lastName (NameWithMiddle _ _ l) = l
+  firstName (Name f _            ) = f
+  firstName (NameWithMiddle f _ _) = f
+  showABO (BloodType A  _) = "A"
+  showABO (BloodType B  _) = "B"
+  showABO (BloodType AB _) = "AB"
+  showABO (BloodType O  _) = "O"
+  showRh (BloodType _ Pos) = "+"
+  showRh (BloodType _ Neg) = "-"
+  showBloodType b = showABO b ++ showRh b
