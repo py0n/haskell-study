@@ -1,5 +1,11 @@
 module Lib
-  ( concatAll
+  ( ABOType(A, B, AB, O)
+  , BloodType(BloodType)
+  , Name(Name, NameWithMiddle)
+  , Patient(Patient)
+  , RhType(Pos, Neg)
+  , Sex(Male, Female)
+  , concatAll
   , fib
   , fib'
   , harmonic
@@ -114,3 +120,34 @@ harmonic n = sum (take n (map (\x -> 1 / fromIntegral x) [1 ..]))
 -- Quick Check 11-2
 printDouble :: Int -> String
 printDouble n = show (n * 2)
+
+-- Q12-1
+type FirstName = String
+type MiddleName = String
+type LastName = String
+data Name = Name FirstName LastName | NameWithMiddle FirstName MiddleName LastName
+  deriving (Eq, Show)
+
+data Sex = Male | Female deriving (Eq, Show)
+
+data RhType = Pos | Neg deriving (Eq, Show)
+data ABOType = A | B | AB | O deriving (Eq, Show)
+data BloodType = BloodType ABOType RhType deriving (Eq, Show)
+
+data Patient = Patient { name :: Name
+                       , sex :: Sex
+                       , age :: Int
+                       , height :: Int
+                       , weight :: Int
+                       , bloodType :: BloodType } deriving (Eq, Show)
+
+canDonateTo :: Patient -> Patient -> Bool
+canDonateTo p q = g (bloodType p) (bloodType q)
+ where
+  g (BloodType _ Pos) (BloodType _ Neg) = False
+  g (BloodType _ Neg) (BloodType _ Pos) = False
+  g (BloodType O _  ) _                 = True
+  g _                 (BloodType AB _)  = True
+  g (BloodType A _)   (BloodType A  _)  = True
+  g (BloodType B _)   (BloodType B  _)  = True
+  g _                 _                 = False
