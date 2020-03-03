@@ -27,6 +27,8 @@ module Lib
   , remove
   , remove'
   , roll
+  , rotStrDecoder
+  , rotStrEncoder
   , someFunc
   , subseq
   )
@@ -206,3 +208,27 @@ class (Eq a, Enum a) => Die a where
 
 instance Die FiveSideDie where
   roll n = toEnum (n `mod` 5)
+
+-- Lesson15
+rotNencoder :: (Bounded a, Enum a) => Int -> Int -> a -> a
+rotNencoder size offset c = toEnum c'
+  where c' = (fromEnum c + offset) `mod` size
+
+rotNdecoder :: (Bounded a, Enum a) => Int -> Int -> a -> a
+rotNdecoder size offset c = toEnum c'
+  where c' = (fromEnum c - offset) `mod` size
+
+offsetChar = 14
+sizeChar = fromEnum (maxBound :: Char) - fromEnum (minBound :: Char) - 1
+
+rotCharDecoder :: Char -> Char
+rotCharDecoder c = rotNdecoder sizeChar offsetChar c
+
+rotCharEncoder :: Char -> Char
+rotCharEncoder c = rotNencoder sizeChar offsetChar c
+
+rotStrDecoder :: String -> String
+rotStrDecoder xs = map rotCharDecoder xs
+
+rotStrEncoder :: String -> String
+rotStrEncoder xs = map rotCharEncoder xs
