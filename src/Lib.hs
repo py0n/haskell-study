@@ -3,11 +3,14 @@ module Lib
   , BloodType(BloodType)
   , FiveSideDie(S1, S2, S3, S4, S5)
   , Name(Name, NameWithMiddle)
+  , OneTimePad(OTP)
   , Patient(Patient)
   , RhType(Pos, Neg)
   , Sex(Male, Female)
   , concatAll
   , cycleSucc
+  , decode
+  , encode
   , fib
   , fib'
   , harmonic
@@ -245,3 +248,14 @@ padEncoder pad xs = map toEnum mixed
  where
   pairs = zip (cycle pad) xs
   mixed = map (\(a, b) -> xor (fromEnum a) (fromEnum b)) pairs
+
+-- Lesson15.5
+class Cipher a where
+  decode :: a -> String -> String
+  encode :: a -> String -> String
+
+data OneTimePad = OTP String deriving (Show)
+
+instance Cipher OneTimePad where
+  decode (OTP pad) text = padDecoder pad text
+  encode (OTP pad) text = padEncoder pad text
