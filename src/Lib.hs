@@ -22,6 +22,8 @@ module Lib
   , myReverse'
   , myTail
   , myTake
+  , padDecoder
+  , padEncoder
   , patientSummary
   , printDouble
   , remove
@@ -34,6 +36,7 @@ module Lib
   )
 where
 
+import           Data.Bits                      ( xor )
 import           Data.Char                      ( isAlpha
                                                 , toUpper
                                                 )
@@ -232,3 +235,13 @@ rotStrDecoder xs = map rotCharDecoder xs
 
 rotStrEncoder :: String -> String
 rotStrEncoder xs = map rotCharEncoder xs
+
+-- Lesson15.4
+padDecoder :: String -> String -> String
+padDecoder = padEncoder
+
+padEncoder :: String -> String -> String
+padEncoder pad xs = map toEnum mixed
+ where
+  pairs = zip (cycle pad) xs
+  mixed = map (\(a, b) -> xor (fromEnum a) (fromEnum b)) pairs
