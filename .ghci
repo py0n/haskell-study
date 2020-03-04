@@ -1,5 +1,5 @@
 :set +s
 -- https://haskell.jp/blog/posts/2019/unicode-show.html
 :set -package unicode-show
-import Text.Show.Unicode
+:module + Text.Show.Unicode
 :set -interactive-print=uprint
