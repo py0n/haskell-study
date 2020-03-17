@@ -1,7 +1,7 @@
 module Lib
   ( ABOType(A, B, AB, O)
   , BloodType(BloodType)
-  , Color(Red, Yellow, Blue, Green, Purple, Orange, Brown)
+  , Color(Red, Yellow, Blue, Green, Purple, Orange, Brown, Clear)
   , FiveSideDie(S1, S2, S3, S4, S5)
   , Name(Name, NameWithMiddle)
   , OneTimePad(OTP)
@@ -271,9 +271,11 @@ myAny :: (a -> Bool) -> [a] -> Bool
 myAny f = (foldr (||) False) . (map f)
 
 -- Lesson17.2
-data Color = Red | Yellow | Blue | Green | Purple | Orange | Brown deriving (Eq, Show)
+data Color = Red | Yellow | Blue | Green | Purple | Orange | Brown | Clear deriving (Eq, Show)
 
 instance Semigroup Color where
+  (<>) Clear  c      = c
+  (<>) c      Clear  = c
   (<>) Blue   Red    = Purple
   (<>) Blue   Yellow = Green
   (<>) Red    Blue   = Purple
@@ -285,6 +287,9 @@ instance Semigroup Color where
            | all (`elem` [Blue, Purple, Red]) [a, b] = Purple
            | all (`elem` [Orange, Red, Yellow]) [a, b] = Orange
            | otherwise = Brown
+
+instance Monoid Color where
+  mempty = Clear
 
 -- Lesson17.3
 type Event = (String, Double)
