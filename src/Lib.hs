@@ -8,7 +8,10 @@ module Lib
   , Patient(Patient)
   , RhType(Pos, Neg)
   , Sex(Male, Female)
+  , cartCombine
+  , combineEvents
   , concatAll
+  , createPTable
   , cycleSucc
   , decode
   , encode
@@ -36,6 +39,7 @@ module Lib
   , roll
   , rotStrDecoder
   , rotStrEncoder
+  , showEvent
   , someFunc
   , subseq
   )
@@ -281,3 +285,36 @@ instance Semigroup Color where
            | all (`elem` [Blue, Purple, Red]) [a, b] = Purple
            | all (`elem` [Orange, Red, Yellow]) [a, b] = Orange
            | otherwise = Brown
+
+-- Lesson17.3
+type Event = (String, Double)
+
+showEvent :: Event -> String
+showEvent e = mconcat [fst e, "|", (show . snd) e, "\n"]
+
+data PTable = PTable [Event]
+
+createPTable :: [Event] -> PTable
+createPTable events = PTable (map (\x -> (fst x, snd x / total)) events)
+  where total = (sum . map snd) events
+
+instance Show PTable where
+  show (PTable events) = (mconcat . map showEvent) events
+
+instance Semigroup PTable where
+  (<>) p           (PTable []) = p
+  (<>) (PTable []) p           = p
+  (<>) (PTable xs) (PTable ys) = createPTable (combineEvents xs ys)
+
+instance Monoid PTable where
+  mempty = PTable []
+
+cartCombine :: (a -> b -> c) -> [a] -> [b] -> [c]
+cartCombine f xs ys = zipWith f xs' ys'
+ where
+  xs' = mconcat (map (replicate (length ys)) xs)
+  ys' = cycle ys
+
+combineEvents :: [Event] -> [Event] -> [Event]
+combineEvents xs ys = cartCombine combiner xs ys
+  where combiner x y = (mconcat [fst x, "-", fst y], snd x * snd y)
