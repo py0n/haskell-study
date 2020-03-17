@@ -1,6 +1,7 @@
 module Lib
   ( ABOType(A, B, AB, O)
   , BloodType(BloodType)
+  , Color(Red, Yellow, Blue, Green, Purple, Orange, Brown)
   , FiveSideDie(S1, S2, S3, S4, S5)
   , Name(Name, NameWithMiddle)
   , OneTimePad(OTP)
@@ -264,3 +265,19 @@ instance Cipher OneTimePad where
 -- Quick Check 17-1
 myAny :: (a -> Bool) -> [a] -> Bool
 myAny f = (foldr (||) False) . (map f)
+
+-- Lesson17.2
+data Color = Red | Yellow | Blue | Green | Purple | Orange | Brown deriving (Eq, Show)
+
+instance Semigroup Color where
+  (<>) Blue   Red    = Purple
+  (<>) Blue   Yellow = Green
+  (<>) Red    Blue   = Purple
+  (<>) Red    Yellow = Orange
+  (<>) Yellow Blue   = Green
+  (<>) Yellow Red    = Orange
+  (<>) a b | a == b    = a
+           | all (`elem` [Blue, Green, Yellow]) [a, b] = Green
+           | all (`elem` [Blue, Purple, Red]) [a, b] = Purple
+           | all (`elem` [Orange, Red, Yellow]) [a, b] = Orange
+           | otherwise = Brown
