@@ -16,6 +16,7 @@ module Lib
   , harmonic
   , inFirstHalf
   , isPalindrome
+  , myAny
   , myDrop
   , myElem
   , myGCD
@@ -259,3 +260,7 @@ data OneTimePad = OTP String deriving (Show)
 instance Cipher OneTimePad where
   decode (OTP pad) text = padDecoder pad text
   encode (OTP pad) text = padEncoder pad text
+
+-- Quick Check 17-1
+myAny :: (a -> Bool) -> [a] -> Bool
+myAny f = (foldr (||) False) . (map f)

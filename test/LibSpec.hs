@@ -92,6 +92,10 @@ spec = do
     it "should return \"A man a plan a canal Panama\"" $ do
       L.isPalindrome "A man a plan a canal Panama" `shouldBe` True
 
+  describe "myAny" $ do
+    it "should return True" $ do
+      L.myAny (\x -> x == 'e') "Hello" `shouldBe` True
+
   describe "myDrop" $ do
     it "should return \"\"" $ do
       L.myDrop 3 "" `shouldBe` ""
