@@ -8,6 +8,7 @@ module Lib
   , Patient(Patient)
   , RhType(Pos, Neg)
   , Sex(Male, Female)
+  , Triple(Triple)
   , concatAll
   , createPTable
   , cycleSucc
@@ -15,9 +16,12 @@ module Lib
   , encode
   , fib
   , fib'
+  , first
   , harmonic
   , inFirstHalf
   , isPalindrome
+  , makeListFromTriple
+  , makeTripleFromList
   , myAny
   , myDrop
   , myElem
@@ -37,8 +41,11 @@ module Lib
   , roll
   , rotStrDecoder
   , rotStrEncoder
+  , second
   , someFunc
   , subseq
+  , third
+  , transformTriple
   )
 where
 
@@ -337,3 +344,24 @@ cartCombine f xs ys = zipWith f xs' ys'
  where
   xs' = (mconcat . map (replicate (length ys))) xs
   ys' = cycle ys
+
+-- Lesson18.1
+data Triple a = Triple a a a deriving (Eq, Show)
+
+first :: Triple a -> a
+first (Triple x _ _) = x
+
+second :: Triple a -> a
+second (Triple _ x _) = x
+
+third :: Triple a -> a
+third (Triple _ _ x) = x
+
+makeTripleFromList :: [a] -> Triple a
+makeTripleFromList [x, y, z] = Triple x y z
+
+makeListFromTriple :: Triple a -> [a]
+makeListFromTriple (Triple x y z) = [x, y, z]
+
+transformTriple :: (a -> a) -> Triple a -> Triple a
+transformTriple f (Triple x y z) = Triple (f x) (f y) (f z)
