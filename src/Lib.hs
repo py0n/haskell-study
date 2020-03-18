@@ -8,8 +8,6 @@ module Lib
   , Patient(Patient)
   , RhType(Pos, Neg)
   , Sex(Male, Female)
-  , cartCombine
-  , combineEvents
   , concatAll
   , createPTable
   , cycleSucc
@@ -39,7 +37,6 @@ module Lib
   , roll
   , rotStrDecoder
   , rotStrEncoder
-  , showEvent
   , someFunc
   , subseq
   )
@@ -292,34 +289,51 @@ instance Monoid Color where
   mempty = Clear
 
 -- Lesson17.3
-type Event = (String, Double)
+data Event = Event String Double
 
-showEvent :: Event -> String
-showEvent e = mconcat [fst e, "|", (show . snd) e, "\n"]
+instance Show Event where
+  show (Event n p) = mconcat [n, "|", (show p), "\n"]
 
-data PTable = PTable [Event]
+instance Semigroup Event where
+  (<>) (Event n0 p0) (Event n1 p1) = Event (mconcat [n0, "-", n1]) (p0 * p1)
 
-createPTable :: [Event] -> PTable
-createPTable events = PTable (map (\x -> (fst x, snd x / total)) events)
-  where total = (sum . map snd) events
+data Events = Events [Event]
+
+createEvents :: [(String, Double)] -> Events
+createEvents xs = Events xs'
+ where
+  total = (sum . map snd) xs
+  xs'   = map (\x -> Event (fst x) (snd x / total)) xs
+
+instance Show Events where
+  show (Events xs) = (mconcat . map show) xs
+
+instance Semigroup Events where
+  (<>) e           (Events []) = e
+  (<>) (Events []) e           = e
+  (<>) (Events xs) (Events ys) = Events (cartCombine (<>) xs ys)
+
+instance Monoid Events where
+  mempty = Events []
+
+data PTable = PTable Events
+
+createPTable :: [(String, Double)] -> PTable
+createPTable xs = PTable (createEvents xs)
 
 instance Show PTable where
-  show (PTable events) = (mconcat . map showEvent) events
+  show (PTable events) = show events
 
 instance Semigroup PTable where
-  (<>) p           (PTable []) = p
-  (<>) (PTable []) p           = p
-  (<>) (PTable xs) (PTable ys) = createPTable (combineEvents xs ys)
+  (<>) p                    (PTable (Events [])) = p
+  (<>) (PTable (Events [])) p                    = p
+  (<>) (PTable xs         ) (PTable ys)          = PTable (xs <> ys)
 
 instance Monoid PTable where
-  mempty = PTable []
+  mempty = PTable (Events [])
 
 cartCombine :: (a -> b -> c) -> [a] -> [b] -> [c]
 cartCombine f xs ys = zipWith f xs' ys'
  where
-  xs' = mconcat (map (replicate (length ys)) xs)
+  xs' = (mconcat . map (replicate (length ys))) xs
   ys' = cycle ys
-
-combineEvents :: [Event] -> [Event] -> [Event]
-combineEvents xs ys = cartCombine combiner xs ys
-  where combiner x y = (mconcat [fst x, "-", fst y], snd x * snd y)
