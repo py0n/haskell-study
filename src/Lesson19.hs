@@ -6,6 +6,7 @@ module Lesson19
 where
 
 import           Data.Map                      as Map
+import           Data.Maybe                     ( isNothing )
 
 -- Lesson 19
 data Organ = Heart | Brain | Kidney | Spleen deriving (Show, Eq)
@@ -53,7 +54,15 @@ processAndReport :: Maybe Organ -> String
 processAndReport Nothing      = "error, id not found"
 processAndReport (Just organ) = report (process organ)
 
+getDrawerContents :: [Int] -> Map.Map Int Organ -> [Maybe Organ]
+getDrawerContents ids catalog = Prelude.map getContents ids
+  where getContents = \id -> Map.lookup id catalog
+
 -- Quick Check 19-2
 numOrZero :: Maybe Int -> Int
 numOrZero Nothing  = 0
 numOrZero (Just n) = n
+
+-- Q19-1
+emptyDrawers :: [Maybe Organ] -> Int
+emptyDrawers = length . Prelude.filter isNothing
