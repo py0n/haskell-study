@@ -66,3 +66,8 @@ numOrZero (Just n) = n
 -- Q19-1
 emptyDrawers :: [Maybe Organ] -> Int
 emptyDrawers = length . Prelude.filter isNothing
+
+-- Q19-2
+maybeMap :: (a -> b) -> Maybe a -> Maybe b
+maybeMap _ Nothing  = Nothing
+maybeMap f (Just x) = Just (f x)
