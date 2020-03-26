@@ -1,5 +1,6 @@
 module Lesson21
-  ( comparePizza
+  ( answerFib
+  , comparePizza
   , helloMaybePerson
   , helloPerson
   , maybeMain
@@ -7,6 +8,7 @@ module Lesson21
 where
 
 import qualified Data.Map                      as Map
+import qualified Lesson08                      as L08
 
 -- Lesson 21.2
 createHello :: String -> String
@@ -74,10 +76,18 @@ maybeMain = do
 
 -- Q21-1
 nameData :: Map.Map Int String
-nameData = Map.fromList [(1, "太郎"),(2,"花子")]
+nameData = Map.fromList [(1, "太郎"), (2, "花子")]
 
 helloMaybePerson :: Maybe String
 helloMaybePerson = do
   name <- Map.lookup 1 nameData
   let statement = createHello name
   return statement
+
+-- Q21-2
+answerFib :: IO ()
+answerFib = do
+  putStrLn "何番目のフィボナッチ数が必要ですか?"
+  n <- getLine
+  let nthFib = L08.fib' (read n)
+  putStrLn (n ++ "番目のフィボナッチ数は" ++ show nthFib)
