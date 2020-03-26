@@ -1,5 +1,6 @@
 module Lesson21
   ( comparePizza
+  , helloMaybePerson
   , helloPerson
   , maybeMain
   )
@@ -70,3 +71,13 @@ maybeMain = do
   let pizza2      = (size2, cost2)
   let betterPizza = comparePizzaCost pizza1 pizza2
   return (describePizza betterPizza)
+
+-- Q21-1
+nameData :: Map.Map Int String
+nameData = Map.fromList [(1, "太郎"),(2,"花子")]
+
+helloMaybePerson :: Maybe String
+helloMaybePerson = do
+  name <- Map.lookup 1 nameData
+  let statement = createHello name
+  return statement
