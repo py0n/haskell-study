@@ -8,6 +8,7 @@ main :: IO ()
 main = do
   args <- E.getArgs
   case head args of
-    "mainDie"         -> L21.mainDie
-    "mainHelloPerson" -> L21.mainHelloPerson
-    _                 -> someFunc
+    "mainComparePizzas" -> L21.mainComparePizzas
+    "mainDie"           -> L21.mainDie
+    "mainHelloPerson"   -> L21.mainHelloPerson
+    _                   -> someFunc
