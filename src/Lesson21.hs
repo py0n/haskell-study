@@ -2,6 +2,7 @@ module Lesson21
   ( answerFib
   , comparePizza
   , helloMaybePerson
+  , mainDie
   , mainHelloPerson
   , maybeMain
   )
@@ -9,6 +10,19 @@ where
 
 import qualified Data.Map                      as Map
 import qualified Lesson08                      as L08
+import qualified System.Random                 as R
+
+-- Lesson 21.1
+minDie :: Int
+minDie = 1
+
+maxDie :: Int
+maxDie = 6
+
+mainDie :: IO ()
+mainDie = do
+  dieRoll <- R.randomRIO(minDie, maxDie)
+  putStrLn (show dieRoll)
 
 -- Lesson 21.2
 helloPerson :: String -> String
