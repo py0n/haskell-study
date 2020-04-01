@@ -2,7 +2,7 @@ module Lesson21
   ( answerFib
   , comparePizza
   , helloMaybePerson
-  , helloPerson
+  , mainHelloPerson
   , maybeMain
   )
 where
@@ -11,14 +11,14 @@ import qualified Data.Map                      as Map
 import qualified Lesson08                      as L08
 
 -- Lesson 21.2
-createHello :: String -> String
-createHello name = "Hello " ++ name ++ "!"
+helloPerson :: String -> String
+helloPerson name = "Hello " ++ name ++ "!"
 
-helloPerson :: IO ()
-helloPerson = do
+mainHelloPerson :: IO ()
+mainHelloPerson = do
   putStrLn "Hello What's your name?"
   name <- getLine
-  let statement = createHello name
+  let statement = helloPerson name
   putStrLn statement
 
 -- Lesson 21.3
@@ -81,7 +81,7 @@ nameData = Map.fromList [(1, "太郎"), (2, "花子")]
 helloMaybePerson :: Maybe String
 helloMaybePerson = do
   name <- Map.lookup 1 nameData
-  let statement = createHello name
+  let statement = helloPerson name
   return statement
 
 -- Q21-2
