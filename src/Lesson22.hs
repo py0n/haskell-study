@@ -1,5 +1,6 @@
 module Lesson22
   ( mainShowArgs
+  , mainShowReversedUserInput
   , mainShowUserInput
   )
 where
@@ -17,3 +18,9 @@ mainShowUserInput :: IO ()
 mainShowUserInput = do
   userInput <- getContents
   mapM_ print userInput
+
+-- Quick Check 22-3
+mainShowReversedUserInput :: IO ()
+mainShowReversedUserInput = do
+  userInput <- getContents
+  mapM_ print (reverse userInput)
