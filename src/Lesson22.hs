@@ -1,6 +1,7 @@
 module Lesson22
   ( mainShowArgs
   , mainShowReversedUserInput
+  , mainShowSumSquare
   , mainShowUserInput
   )
 where
@@ -24,3 +25,10 @@ mainShowReversedUserInput :: IO ()
 mainShowReversedUserInput = do
   userInput <- getContents
   mapM_ print (reverse userInput)
+
+-- Quick Check 22-4
+mainShowSumSquare :: IO ()
+mainShowSumSquare = do
+  s <- getContents
+  let ns = map read (lines s)
+  print (sum (map (^ 2) ns))

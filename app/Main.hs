@@ -14,6 +14,7 @@ main = do
     "mainDie"                   -> L21.mainDie
     "mainHelloPerson"           -> L21.mainHelloPerson
     "mainShowArgs"              -> L22.mainShowArgs
-    "mainShowUserInput"         -> L22.mainShowUserInput
     "mainShowReversedUserInput" -> L22.mainShowReversedUserInput
+    "mainShowSumSquare"         -> L22.mainShowSumSquare
+    "mainShowUserInput"         -> L22.mainShowUserInput
     _                           -> someFunc
